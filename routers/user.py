@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 from database import get_db
+from fastapi.middleware.cors import CORSMiddleware
 
 from services import user as UserService
 from dto import user as userDTO
 from speech_to_text import speech_to_text
 
 router = APIRouter()
-
 
 @router.post('/', tags=["user"])
 async def create(data: userDTO.User = None, db: Session = Depends(get_db)):
