@@ -10,5 +10,3 @@ def speech_to_text(pas: str):
     )
     make_request(transcription.text)
 
-
-speech_to_text("uploaded.mp3")
