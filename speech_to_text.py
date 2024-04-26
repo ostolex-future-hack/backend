@@ -8,5 +8,5 @@ def speech_to_text(pas: str):
         model="whisper-1",
         file=audio_file
     )
-    make_request(transcription.text)
 
+    make_request(transcription.text)

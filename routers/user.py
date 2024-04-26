@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 from database import get_db
+from fastapi.middleware.cors import CORSMiddleware
 
 from services import user as UserService
 from dto import user as userDTO
@@ -64,10 +65,11 @@ async def get_language(language: float, db: Session = Depends(get_db)):
     return UserService.get_language_lvl(db, language)
 
 
-@router.post("/upload/", tags=["file"])
+@router.post("/upload/file", tags=["file"])
 async def upload_file(file: UploadFile = File(...)):
+    if file.content_type != "audio/mpeg":
+        return {"error": "Unsupported file type. Only MP3 files are accepted."}
+
     contents = await file.read()
-    with open("uploaded.mp3", "wb") as f:
-        f.write(contents)
-    speech_to_text("uploaded.mp3")
+    speech_to_text(contents)
     return {"filename": file.filename}
