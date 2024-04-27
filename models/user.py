@@ -18,6 +18,7 @@ class User(base):
     name = Column(String, unique=True, index=True)
     language_lvl = Column(Float, index=True)
     goals = relationship("Goal", secondary=users_to_goals, back_populates="users")
+    chat = Column(String)
 
 
 class Goal(base):

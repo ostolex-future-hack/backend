@@ -9,6 +9,7 @@ class users_to_goals(BaseModel):
 class User(BaseModel):
     name: str
     language_lvl: float
+    chat: str
 
 
 class Goal(BaseModel):

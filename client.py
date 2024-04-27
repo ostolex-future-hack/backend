@@ -8,5 +8,5 @@ if not API_KEY:
     raise ValueError('API key not found')
 
 client = OpenAI(
-    api_key=API_KEY
+    api_key="API_KEY"
 )
