@@ -66,12 +66,13 @@ async def get_language(language: float, db: Session = Depends(get_db)):
 
 
 @router.post("/file/upload", tags=["file"])
-async def upload_file(file: UploadFile = File(...)):
-    contents = await file.read()
-    with open("uploaded.mp3", "wb") as f:
-        f.write(contents)
-    speech_to_text("uploaded.mp3")
-    return {"filename": file.filename}
+async def upload_file(id: int, file: UploadFile = File(...), db: Session = Depends(get_db)):
+    # contents = await file.read()
+    # with open("uploaded.mp3", "wb") as f:
+    #     f.write(contents)
+    speech_to_text("uploaded.mp3", id, db)
+    # return {"filename": file.filename}
+
 
 
 @router.get("/file/get", tags=["file"])
